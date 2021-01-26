@@ -2,39 +2,44 @@
 const express = require("express");
 const app = express();
 
-const userList = [];
+var bodyParser = require("body-parser");
+const IP = "127.0.0.1";
+const HOST = 3000;
+
+let userList = new Map();
 const user = {
+  id: "",
   name: "",
+  twitterId: "",
 };
 
-//처음에 500에러가 뜨는데 뜨는 이유는 json을 받아들일 준비가 안되있어서.
-app.use(express.json()); //자바의 @RestController와 동일.
-app.post("/user", function (req, res) {
-  console.log(`request from ${req.ip} / addr : ${req.path}`);
-
-  user.name = req.body.name;
-  userList.push(user);
-
-  console.log(userList);
-  res.send("success");
+app.listen(HOST, IP, function () {
+  console.log("server listen at localhost:" + HOST);
 });
 
-app.listen(3000, "127.0.0.1", function () {
-  console.log("server listen at localhost:3000");
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.post("/users", function (req, response) {
+  user.id = req.body.id;
+  // user.name = request.body.name;
+  // user.twitterId = request.body.twitterId;
+
+  console.log(req.params.id);
+  // userList.set(requset.body.id, user);
+
+  console.log("test");
+
+  // response.send("success");
 });
 
-app.get("/users", function (req, res) {
-  console.log(`request from ${req.ip} / addr : ${req.path}`);
-  res.send(useList);
+app.get("/users/:id", function (request, response) {
+  console.log(request.params.id); //?
 });
 
-app.get("/user/:id", function (req, res) {
-  //단수 데이터 = 자바의 {id}
-  const id = req.params.id;
-  const name = req.query.name;
-  console.log(`request from ${req.ip} / addr : ${req.path}`);
-  //로그를 찍고
+app.get("/users", function (request, response) {
+  response.send(userList);
+});
 
-  res.send(`${id} / $ {name}`);
-  //문자열을 반환한다.
+app.put("/users/:id", function (requset, response) {
+  userList.get({ id });
 });
