@@ -2,9 +2,10 @@
 const express = require("express");
 const app = express();
 
-var bodyParser = require("body-parser");
 const IP = "127.0.0.1";
 const HOST = 3000;
+const NOT_FOUND = "No such data";
+const SUCCESS = "success";
 
 let userList = new Map();
 const user = {
@@ -17,29 +18,46 @@ app.listen(HOST, IP, function () {
   console.log("server listen at localhost:" + HOST);
 });
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-app.post("/users", function (req, response) {
-  user.id = req.body.id;
-  // user.name = request.body.name;
-  // user.twitterId = request.body.twitterId;
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+app.post("/users", function (req, res) {
+  // user.id = req.body.id;
+  // user.name = req.body.name;
+  // user.twitterId = req.body.twitterId;
 
-  console.log(req.params.id);
-  // userList.set(requset.body.id, user);
+  console.log(req.body.id);
+  // userList.set(req.body.id, user);
 
   console.log("test");
 
-  // response.send("success");
+  res.send(SUCCESS);
 });
 
-app.get("/users/:id", function (request, response) {
-  console.log(request.params.id); //?
+app.get("/users/:id", function (req, res) {
+  console.log(req.params.id);
+  if (userList.get(req.params.id) !== null) {
+    res.send(userList.get(req.params.id));
+  }
+  res.send(NOT_FOUND);
 });
 
-app.get("/users", function (request, response) {
-  response.send(userList);
+app.get("/users", function (req, res) {
+  if (userList.size > 0) {
+    res.send(userList);
+  }
+  res.send(NOT_FOUND);
 });
 
-app.put("/users/:id", function (requset, response) {
-  userList.get({ id });
+app.put("/users/:id", function (req, res) {
+  if (userList.get(req.params.id) !== null) {
+    res.send(userList.get(req.params.id));
+  }
+  res.send(NOT_FOUND);
+});
+
+app.delete("/users", function (req, res) {
+  if (userList.get(req.body.id) !== null) {
+    //todo 코딩중
+  }
+  res.send(NOT_FOUND);
 });
