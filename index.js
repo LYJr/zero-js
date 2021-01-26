@@ -7,7 +7,7 @@ const HOST = 3000;
 const NOT_FOUND = "No such data";
 const SUCCESS = "success";
 
-let userList = new Map();
+let userList = new HashMap();
 const user = {
   id: "",
   name: "",
@@ -20,6 +20,8 @@ app.listen(HOST, IP, function () {
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+//todo body.id값 undefined 확인 중
 app.post("/users", function (req, res) {
   // user.id = req.body.id;
   // user.name = req.body.name;
@@ -47,24 +49,25 @@ app.get("/users/:id", function (req, res) {
   res.send(NOT_FOUND);
 });
 
+//todo code 구현
 app.put("/users/:id", function (req, res) {
   if (userList.get(req.params.id) !== undefined) {
-    //todo 코딩중
   }
   res.send(NOT_FOUND);
 });
 
+//todo code 구현
 app.patch("/users/:id", function (req, res) {
   if (userList.get(req.params.id) !== undefined) {
-    //todo 코딩중
     return res.send(userList.get(req.params.id));
   }
   res.send(NOT_FOUND);
 });
 
+//todo test 진행
 app.delete("/users/:id", function (req, res) {
   if (userList.get(req.params.id) !== undefined) {
-    //todo 코딩중
+    userList.delete(req.params.id);
   }
   res.send(NOT_FOUND);
 });
