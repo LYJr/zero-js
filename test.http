@@ -5,15 +5,36 @@ GET http://localhost:3000/users/1 HTTP/1.1
 
 ###
 POST http://localhost:3000/users HTTP/1.1
-Content-Type: "application/json"
+Content-Type: application/json
 
 { 
-  "id": 1
+  "id": 1,
+  "name": "resian",
+  "twitterId": "testId"
 }
 
 ###
-PUT http://localhost:3000/users HTTP/1.1
-Content-Type: "application/json"
+PUT http://localhost:3000/users/1 HTTP/1.1
+Content-Type: application/json
+
+{ 
+  "id": 1,
+  "name": "mesvie",
+  "twitterId": "haha"
+}
+
+###
+PATCH http://localhost:3000/users/1 HTTP/1.1
+Content-Type: application/json
+
+{ 
+  "name": "퇴근하고 싶다."
+} 
 
 ###
 DELETE http://localhost:3000/users HTTP/1.1
+Content-Type: application/json
+
+{
+  "id" : 1
+}
