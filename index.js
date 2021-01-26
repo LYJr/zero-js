@@ -33,30 +33,37 @@ app.post("/users", function (req, res) {
   res.send(SUCCESS);
 });
 
-app.get("/users/:id", function (req, res) {
-  console.log(req.params.id);
-  if (userList.get(req.params.id) !== null) {
-    res.send(userList.get(req.params.id));
+app.get("/users", function (req, res) {
+  if (userList.size > 0) {
+    return res.send(userList);
   }
   res.send(NOT_FOUND);
 });
 
-app.get("/users", function (req, res) {
-  if (userList.size > 0) {
-    res.send(userList);
+app.get("/users/:id", function (req, res) {
+  if (userList.get(req.params.id) !== undefined) {
+    return res.send(userList.get(req.params.id));
   }
   res.send(NOT_FOUND);
 });
 
 app.put("/users/:id", function (req, res) {
-  if (userList.get(req.params.id) !== null) {
-    res.send(userList.get(req.params.id));
+  if (userList.get(req.params.id) !== undefined) {
+    //todo 코딩중
   }
   res.send(NOT_FOUND);
 });
 
-app.delete("/users", function (req, res) {
-  if (userList.get(req.body.id) !== null) {
+app.patch("/users/:id", function (req, res) {
+  if (userList.get(req.params.id) !== undefined) {
+    //todo 코딩중
+    return res.send(userList.get(req.params.id));
+  }
+  res.send(NOT_FOUND);
+});
+
+app.delete("/users/:id", function (req, res) {
+  if (userList.get(req.params.id) !== undefined) {
     //todo 코딩중
   }
   res.send(NOT_FOUND);
