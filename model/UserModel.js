@@ -12,26 +12,25 @@ const assignmentUser = function (body) {
 };
 
 const userUpdate = function (id, body) {
-  console.log("test");
-  // const origin = searchUser(id);
+  const origin = searchUser(id);
 
-  // console.log(origin);
+  if (isUndefined(searchUser(id), undefined)) {
+    origin.id = body.id;
+    origin.name = body.name;
+    origin.twitterId = body.twitterId;
 
-  // if (isUndefined(searchUser(id), undefined)) {
-  //   origin.id = body.id;
-  //   origin.name = body.name;
-  //   origin.twitterId = boyd.twitterId;
+    userList.set(id, origin);
 
-  //   userList.set(id, origin);
-
-  //   return true;
-  // }
+    return true;
+  }
 };
 
-const nameUpdate = function (id, name) {
+const nameUpdate = function (id, body) {
   const origin = searchUser(id);
   if (isUndefined(searchUser(id), undefined)) {
-    origin.name = name;
+    origin.name = body.name;
+    userList.set(id, origin);
+
     return true;
   }
   return false;

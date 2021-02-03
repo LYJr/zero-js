@@ -19,7 +19,7 @@ const updateUser = function (req, res) {
 };
 
 const updateDetailUser = function (req, res) {
-  res.send(userService.updateDetailUser(Number(req.params.id)), req.body);
+  res.send(userService.updateDetailUser(Number(req.params.id), req.body));
 };
 
 const deleteUser = function (req, res) {

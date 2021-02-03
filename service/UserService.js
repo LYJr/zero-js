@@ -23,12 +23,13 @@ const searchUser = function (id) {
 };
 
 const updateUser = function (id, body) {
-  const isUpdate = userModel.updateUser(id, body);
+  const isUpdate = userModel.userUpdate(id, body);
   return isSuccess(isUpdate);
 };
 
-const updateDetailUser = function (id, name) {
-  const isUpdateName = userModel.nameUpdate(id, name);
+const updateDetailUser = function (id, body) {
+  console.log(body);
+  const isUpdateName = userModel.nameUpdate(id, body);
   return isSuccess(isUpdateName);
 };
 
